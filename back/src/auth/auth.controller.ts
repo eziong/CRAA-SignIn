@@ -33,8 +33,8 @@ export class AuthController {
   }
 
   @Put('users/modify')
-  changePassword(@Body() userInfo: UserDto) {
-    return this.authService.changePassword(userInfo);
+  updateUser(@Body() userInfo: UserDto) {
+    return this.authService.updateUser(userInfo);
   }
 
   @Delete('users/:email/delete')

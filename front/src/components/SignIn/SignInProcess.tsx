@@ -1,18 +1,23 @@
 import { AlternateEmail, LockOutlined } from "@mui/icons-material";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import { useEffect, useRef } from "react";
 
 import { Box } from "@mui/system";
 import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import GoogleLogo from "assets/googleLogo.svg";
 import LogoImage from "assets/craa.webp";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
+import { test } from "api/auth";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 
 export function SignInProcess() {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const rememberMeRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    test().then((data) => console.log("data", data.data));
+  }, []);
 
   const navigate = useNavigate();
 

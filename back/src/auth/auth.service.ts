@@ -25,9 +25,13 @@ export class AuthService {
     return user;
   }
 
-  async changePassword({ email, password }: UserDto) {
+  async updateUser({ email, password, name }: UserDto) {
     return this.userModel
-      .findOneAndUpdate({ email }, { $set: { password } }, { new: true })
+      .findOneAndUpdate(
+        { email },
+        { $set: { email, password, name } },
+        { new: true },
+      )
       .then((data) => {
         console.log(data);
       });
