@@ -15,7 +15,7 @@ export function SignUpProcess() {
 
   const onSignUp = async () => {
     if (
-      /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(emailInput) ||
+      !/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(emailInput) ||
       !emailInput ||
       !passwordInput ||
       !fullNameInput

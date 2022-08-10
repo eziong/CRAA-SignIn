@@ -21,7 +21,7 @@ export function SignInProcess() {
   const navigate = useNavigate();
 
   const onSignIn = () => {
-    if (/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(emailInput))
+    if (!/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(emailInput))
       return;
     if (!emailInput || !passwordInput) return;
     if (rememberMeRef.current?.checked) {
