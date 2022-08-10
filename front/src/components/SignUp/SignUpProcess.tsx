@@ -15,9 +15,7 @@ export function SignUpProcess() {
 
   const onSignUp = async () => {
     if (
-      /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/.test(
-        emailInput
-      ) ||
+      /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(emailInput) ||
       !emailInput ||
       !passwordInput ||
       !fullNameInput
@@ -60,9 +58,11 @@ export function SignUpProcess() {
         <TextFieldWithIcon
           value={emailInput}
           onChange={(e) => setEmailInput(e.target.value)}
-          error={/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/.test(
-            emailInput
-          )}
+          error={
+            !/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
+              emailInput
+            )
+          }
           label="Email Address"
           type="email"
         />

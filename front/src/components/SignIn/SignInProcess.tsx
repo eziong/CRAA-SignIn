@@ -21,6 +21,8 @@ export function SignInProcess() {
   const navigate = useNavigate();
 
   const onSignIn = () => {
+    if (/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(emailInput))
+      return;
     if (!emailInput || !passwordInput) return;
     if (rememberMeRef.current?.checked) {
       setStorage("lastLogin", emailInput);
@@ -65,6 +67,11 @@ export function SignInProcess() {
         >
           <TextFieldWithIcon
             value={emailInput}
+            error={
+              !/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
+                emailInput
+              )
+            }
             onChange={(e) => setEmailInput(e.target.value)}
             label="Email"
             type="email"
