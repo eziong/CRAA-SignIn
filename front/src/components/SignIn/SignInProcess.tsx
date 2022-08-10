@@ -1,13 +1,19 @@
 import { AlternateEmail, LockOutlined } from "@mui/icons-material";
-import { Button, InputAdornment, TextField } from "@mui/material";
-import { useEffect, useRef } from "react";
 
+import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 export function SignInProcess() {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
+
+  const goSignUp = () => {
+    navigate("/signUp");
+  };
 
   return (
     <div>
@@ -31,8 +37,16 @@ export function SignInProcess() {
         />
       </div>
       <div>
-        <Button />
-        <Button />
+        <ButtonWithIcon text="Login" variant="contained" onClick={() => {}} />
+        <ButtonWithIcon
+          text="Sign in with Google"
+          variant="outlined"
+          onClick={() => {}}
+        />
+      </div>
+      <div>
+        <span>Don't have an account yet?</span>
+        <span onClick={goSignUp}>Sign Up</span>
       </div>
     </div>
   );

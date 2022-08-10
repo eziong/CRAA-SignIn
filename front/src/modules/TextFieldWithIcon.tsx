@@ -22,6 +22,7 @@ export function TextFieldWithIcon({
       type={type}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
+      fullWidth={true}
       InputProps={{
         endAdornment: (
           <InputAdornment
