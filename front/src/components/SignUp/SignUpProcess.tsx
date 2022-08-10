@@ -61,7 +61,7 @@ export function SignUpProcess() {
           error={
             !/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
               emailInput
-            )
+            ) && emailInput.length !== 0
           }
           label="Email Address"
           type="email"

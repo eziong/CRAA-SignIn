@@ -70,7 +70,7 @@ export function SignInProcess() {
             error={
               !/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
                 emailInput
-              )
+              ) && emailInput.length !== 0
             }
             onChange={(e) => setEmailInput(e.target.value)}
             label="Email"
