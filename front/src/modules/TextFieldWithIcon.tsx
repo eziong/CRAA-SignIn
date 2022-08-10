@@ -3,11 +3,13 @@ import { InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 
 export function TextFieldWithIcon({
+  defaultValue = "",
   inputRef,
   label,
   type,
   icon,
 }: {
+  defaultValue?: string;
   inputRef: React.Ref<any>;
   label: string;
   type: string;
@@ -17,6 +19,7 @@ export function TextFieldWithIcon({
 
   return (
     <TextField
+      defaultValue={defaultValue}
       inputRef={inputRef}
       label={label}
       type={type}

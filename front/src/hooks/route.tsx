@@ -7,11 +7,9 @@ import { useRecoilValue } from "recoil";
 export const useVerificationRoute = () => {
   const isVerified = useRecoilValue(verifiedState);
   const isLoading = useRecoilValue(verifyLoadingState);
-  const token = useRecoilValue(tokenState);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(isLoading, isVerified, token);
     if (isLoading) return;
     if (isVerified) return navigate("/");
     navigate("/signIn");

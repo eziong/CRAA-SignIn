@@ -28,7 +28,6 @@ export class AuthService {
 
   async verifyUserWithToken(token: string) {
     const result = this.jwtService.decode(token);
-    console.log('result', result);
     if (result) return true;
     return false;
   }

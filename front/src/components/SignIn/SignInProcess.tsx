@@ -1,5 +1,6 @@
 import { AlternateEmail, LockOutlined } from "@mui/icons-material";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import { getStorage, setStorage } from "utils/storage";
 import { useEffect, useRef, useState } from "react";
 
 import { Box } from "@mui/system";
@@ -8,7 +9,6 @@ import GoogleLogo from "assets/googleLogo.svg";
 import LogoImage from "assets/craa.webp";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
 import { useNavigate } from "react-router-dom";
-import { verifyUserWithToken } from "api/auth";
 
 export function SignInProcess() {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -19,6 +19,9 @@ export function SignInProcess() {
 
   const onSignIn = () => {
     if (!emailInputRef.current || !passwordInputRef.current) return;
+    if (rememberMeRef.current?.checked) {
+      setStorage("lastLogin", emailInputRef.current.value);
+    }
     navigate("/verification", {
       state: {
         email: emailInputRef.current.value,
@@ -58,6 +61,9 @@ export function SignInProcess() {
           justifyContent="space-between"
         >
           <TextFieldWithIcon
+            defaultValue={
+              getStorage("lastLogin") ? getStorage("lastLogin") + "" : ""
+            }
             inputRef={emailInputRef}
             label="Email"
             type="email"
@@ -78,6 +84,7 @@ export function SignInProcess() {
         >
           <Typography color={"#555555"}>
             <input
+              ref={rememberMeRef}
               id="rememberMe"
               type="checkbox"
               style={{ transform: "scale(1.3)" }}
