@@ -20,7 +20,13 @@ export function ButtonWithIcon({
       variant={variant}
       fullWidth={true}
       onClick={onClick}
-      style={{ height: 45, ...style }}
+      style={{
+        height: 52,
+        textTransform: "none",
+        borderRadius: 10,
+        ...style,
+        fontSize: 16,
+      }}
       startIcon={startIcon}
       endIcon={endIcon}
     >

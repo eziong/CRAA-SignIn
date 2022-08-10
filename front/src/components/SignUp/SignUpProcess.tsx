@@ -17,7 +17,7 @@ export function SignUpProcess() {
   };
 
   return (
-    <Card elevation={0} style={{ width: 360 }}>
+    <Card elevation={0} style={{ width: 400 }}>
       <CardHeader
         title="Sign up"
         titleTypographyProps={{ fontWeight: 550 }}
@@ -50,9 +50,9 @@ export function SignUpProcess() {
       <CardContent style={{ paddingTop: 0, paddingBottom: 24 }}>
         <Typography>
           <span>You are agreeing to the</span>
-          <span style={{ color: "#1976d2" }}>Terms of Services </span>
+          <span className="text-link">Terms of Services </span>
           <span>and </span>
-          <span style={{ color: "#1976d2" }}>Privacy Policy</span>
+          <span className="text-link">Privacy Policy</span>
         </Typography>
       </CardContent>
       <CardContent>
@@ -60,6 +60,7 @@ export function SignUpProcess() {
           text="Get Started"
           variant="contained"
           onClick={() => {}}
+          style={{ backgroundColor: "#3333ee" }}
         />
       </CardContent>
       <CardContent
@@ -73,7 +74,11 @@ export function SignUpProcess() {
       >
         <Typography>
           <span>Already a member? </span>
-          <span style={{ color: "#1976d2" }} onClick={goSignIn}>
+          <span
+            className="text-link"
+            onClick={goSignIn}
+            style={{ fontWeight: 550 }}
+          >
             Sign in
           </span>
         </Typography>

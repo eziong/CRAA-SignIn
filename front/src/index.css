@@ -1,3 +1,9 @@
 body {
   margin: 0;
 }
+
+.text-link {
+  cursor: pointer;
+  color: #1976d2;
+  user-select: none;
+}
