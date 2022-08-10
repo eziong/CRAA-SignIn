@@ -2,12 +2,12 @@ import { BasicTemplate } from "templates/BasicTemplate";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function NotFound() {
+export function NotFound({ path }: { path: string }) {
   const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
-      navigate("/");
+      navigate(path);
     }, 1000);
   }, []);
 

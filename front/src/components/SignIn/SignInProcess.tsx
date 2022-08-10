@@ -1,14 +1,14 @@
 import { AlternateEmail, LockOutlined } from "@mui/icons-material";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Box } from "@mui/system";
 import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import GoogleLogo from "assets/googleLogo.svg";
 import LogoImage from "assets/craa.webp";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
-import { getStorage } from "utils/storage";
 import { useNavigate } from "react-router-dom";
+import { verifyUserWithToken } from "api/auth";
 
 export function SignInProcess() {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -30,11 +30,6 @@ export function SignInProcess() {
   const goSignUp = () => {
     navigate("/signUp");
   };
-
-  useEffect(() => {
-    const token = getStorage("token");
-    if (token) navigate("/home");
-  }, []);
 
   return (
     <Card elevation={0} style={{ width: 400 }}>

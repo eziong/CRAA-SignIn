@@ -5,8 +5,6 @@ import { User, UserDocument } from 'schema/user';
 import { UserDto } from './types';
 import { JwtService } from '@nestjs/jwt';
 
-const privateKey = 'myPrivateKey';
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -19,7 +17,7 @@ export class AuthService {
   }
 
   getUserToken(user: User) {
-    return this.jwtService.sign(JSON.stringify(user));
+    return this.jwtService.sign(JSON.parse(JSON.stringify(user)));
   }
 
   async verifyUser(email: string, password: string) {
@@ -29,12 +27,10 @@ export class AuthService {
   }
 
   async verifyUserWithToken(token: string) {
-    try {
-      this.jwtService.verify(token);
-      return true;
-    } catch (err) {
-      return false;
-    }
+    const result = this.jwtService.decode(token);
+    console.log('result', result);
+    if (result) return true;
+    return false;
   }
 
   async getUser(email: string): Promise<User> {
