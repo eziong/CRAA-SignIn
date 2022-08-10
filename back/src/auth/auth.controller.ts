@@ -23,7 +23,7 @@ export class AuthController {
   }
 
   @Post('users/verification')
-  verifyUser(@Body() { email, password }): Promise<User> {
+  verifyUser(@Body() { email, password }): Promise<string> {
     return this.authService.verifyUser(email, password);
   }
 

@@ -7,8 +7,8 @@ import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import GoogleLogo from "assets/googleLogo.svg";
 import LogoImage from "assets/craa.webp";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
+import { getStorage } from "utils/storage";
 import { useNavigate } from "react-router-dom";
-import { verifyUser } from "api/auth";
 
 export function SignInProcess() {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -19,18 +19,22 @@ export function SignInProcess() {
 
   const onSignIn = () => {
     if (!emailInputRef.current || !passwordInputRef.current) return;
-    verifyUser({
-      email: emailInputRef.current.value,
-      password: passwordInputRef.current?.value,
+    navigate("/verification", {
+      state: {
+        email: emailInputRef.current.value,
+        password: passwordInputRef.current.value,
+      },
     });
-    // then login and navigate
-    // if verified => login and navigate
-    // if not => alert
   };
 
   const goSignUp = () => {
     navigate("/signUp");
   };
+
+  useEffect(() => {
+    const token = getStorage("token");
+    if (token) navigate("/home");
+  }, []);
 
   return (
     <Card elevation={0} style={{ width: 400 }}>

@@ -13,15 +13,17 @@ export class AuthService {
   }
 
   async verifyUser(email: string, password: string) {
-    return this.userModel.findOne({ email, password });
+    const user = await this.userModel.findOne({ email, password });
+    if (user) return JSON.stringify(user); // user token
+    return '';
   }
 
   async getUser(email: string): Promise<User> {
-    return this.userModel.findOne({ email });
+    return await this.userModel.findOne({ email });
   }
 
   async createUser({ email, password, name }: UserDto): Promise<User> {
-    const user = this.userModel.create({
+    const user = await this.userModel.create({
       email,
       password,
       name,
@@ -30,7 +32,7 @@ export class AuthService {
   }
 
   async updateUser({ email, password, name }: UserDto) {
-    return this.userModel
+    return await this.userModel
       .findOneAndUpdate(
         { email },
         { $set: { email, password, name } },
@@ -42,6 +44,6 @@ export class AuthService {
   }
 
   async deleteUser(email: string) {
-    return this.userModel.findOneAndDelete({ email });
+    return await this.userModel.findOneAndDelete({ email });
   }
 }
