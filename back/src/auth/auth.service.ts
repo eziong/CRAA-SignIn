@@ -3,32 +3,51 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from 'schema/user';
 import { UserDto } from './types';
+import { JwtService } from '@nestjs/jwt';
+
+const privateKey = 'myPrivateKey';
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private jwtService: JwtService,
+  ) {}
 
   getHello(): string {
     return 'hello world -auth';
   }
 
+  getUserToken(user: User) {
+    return this.jwtService.sign(JSON.stringify(user));
+  }
+
   async verifyUser(email: string, password: string) {
     const user = await this.userModel.findOne({ email, password });
-    if (user) return JSON.stringify(user); // user token
+    if (user) return this.getUserToken(user); //JSON.stringify(user); // user token
     return '';
+  }
+
+  async verifyUserWithToken(token: string) {
+    try {
+      this.jwtService.verify(token);
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 
   async getUser(email: string): Promise<User> {
     return await this.userModel.findOne({ email });
   }
 
-  async createUser({ email, password, name }: UserDto): Promise<User> {
+  async createUser({ email, password, name }: UserDto): Promise<string> {
     const user = await this.userModel.create({
       email,
       password,
       name,
     });
-    return user;
+    return this.getUserToken(user);
   }
 
   async updateUser({ email, password, name }: UserDto) {

@@ -7,6 +7,9 @@ export const test = () => baseURL.get("/auth");
 export const verifyUser = (userInfo: UserDto) =>
   baseURL.post("/auth/users/verification", userInfo);
 
+export const verifyUserWithToken = (token: string) =>
+  baseURL.get(`auth/users/verification/${token}`);
+
 export const createUser = (userInfo: UserDto) =>
   baseURL.post("auth/users/create", userInfo);
 

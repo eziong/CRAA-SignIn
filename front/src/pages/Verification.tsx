@@ -16,10 +16,10 @@ export function Verification() {
       const verifiedToken = (await verifyUser({ email, password })).data;
       return verifiedToken;
     })()
-      .then((verified) => {
-        if (verified) {
-          const user = readUser(email);
-          setStorage("token", user);
+      .then((verifiedToken) => {
+        if (verifiedToken) {
+          // const user = readUser(email);
+          setStorage("token", verifiedToken);
           navigate("/");
         } else navigate("/");
       })
