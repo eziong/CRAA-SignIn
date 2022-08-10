@@ -3,14 +3,22 @@ import { InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 
 export function TextFieldWithIcon({
-  defaultValue = "",
+  defaultValue,
+  value = "",
+  onChange,
+  helperText,
+  error,
   inputRef,
   label,
   type,
   icon,
 }: {
   defaultValue?: string;
-  inputRef: React.Ref<any>;
+  value?: string;
+  onChange?: (e: any) => void;
+  helperText?: string;
+  error?: boolean;
+  inputRef?: React.Ref<any>;
   label: string;
   type: string;
   icon?: JSX.Element;
@@ -20,9 +28,13 @@ export function TextFieldWithIcon({
   return (
     <TextField
       defaultValue={defaultValue}
+      value={value}
+      helperText={helperText}
+      error={error}
       inputRef={inputRef}
       label={label}
       type={type}
+      onChange={onChange}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       fullWidth={true}

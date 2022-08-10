@@ -11,21 +11,24 @@ import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
 import { useNavigate } from "react-router-dom";
 
 export function SignInProcess() {
-  const emailInputRef = useRef<HTMLInputElement>(null);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
+  const [emailInput, setEmailInput] = useState<string>(
+    getStorage("lastLogin") ? getStorage("lastLogin") + "" : ""
+  );
+  const [passwordInput, setPasswordInput] = useState<string>("");
+
   const rememberMeRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
   const onSignIn = () => {
-    if (!emailInputRef.current || !passwordInputRef.current) return;
+    if (!emailInput || !passwordInput) return;
     if (rememberMeRef.current?.checked) {
-      setStorage("lastLogin", emailInputRef.current.value);
+      setStorage("lastLogin", emailInput);
     }
     navigate("/verification", {
       state: {
-        email: emailInputRef.current.value,
-        password: passwordInputRef.current.value,
+        email: emailInput,
+        password: passwordInput,
       },
     });
   };
@@ -61,16 +64,15 @@ export function SignInProcess() {
           justifyContent="space-between"
         >
           <TextFieldWithIcon
-            defaultValue={
-              getStorage("lastLogin") ? getStorage("lastLogin") + "" : ""
-            }
-            inputRef={emailInputRef}
+            value={emailInput}
+            onChange={(e) => setEmailInput(e.target.value)}
             label="Email"
             type="email"
             icon={<AlternateEmail />}
           />
           <TextFieldWithIcon
-            inputRef={passwordInputRef}
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
             label="Password"
             type="password"
             icon={<LockOutlined />}
@@ -91,7 +93,15 @@ export function SignInProcess() {
             />
             <label htmlFor="rememberMe">Remember Me</label>
           </Typography>
-          <Typography className="text-link">Recovery Password</Typography>
+          <Typography className="text-link">
+            <span
+              onClick={() => {
+                alert("not developed yet");
+              }}
+            >
+              Recovery Password
+            </span>
+          </Typography>
         </Box>
       </CardContent>
       <CardContent

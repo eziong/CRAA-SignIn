@@ -1,29 +1,40 @@
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import { useRef, useState } from "react";
 
 import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
 import { createUser } from "api/auth";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 
 export function SignUpProcess() {
-  const fullNameInputRef = useRef<HTMLInputElement>(null);
-  const emailInputRef = useRef<HTMLInputElement>(null);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
+  const [fullNameInput, setFullNameInput] = useState<string>("");
+  const [emailInput, setEmailInput] = useState<string>("");
+  const [passwordInput, setPasswordInput] = useState<string>("");
 
   const navigate = useNavigate();
 
-  const onSignUp = () => {
+  const onSignUp = async () => {
     if (
-      !emailInputRef.current ||
-      !passwordInputRef.current ||
-      !fullNameInputRef.current
+      /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/.test(
+        emailInput
+      ) ||
+      !emailInput ||
+      !passwordInput ||
+      !fullNameInput
     )
-      return;
-    createUser({
-      email: emailInputRef.current.value,
-      password: passwordInputRef.current.value,
-      name: fullNameInputRef.current.value,
+      return alert("Check validation");
+
+    await createUser({
+      email: emailInput,
+      password: passwordInput,
+      name: fullNameInput,
+    });
+
+    navigate("/verification", {
+      state: {
+        email: emailInput,
+        password: passwordInput,
+      },
     });
   };
 
@@ -47,17 +58,23 @@ export function SignUpProcess() {
         }}
       >
         <TextFieldWithIcon
-          inputRef={emailInputRef}
+          value={emailInput}
+          onChange={(e) => setEmailInput(e.target.value)}
+          error={/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/.test(
+            emailInput
+          )}
           label="Email Address"
           type="email"
         />
         <TextFieldWithIcon
-          inputRef={fullNameInputRef}
+          value={fullNameInput}
+          onChange={(e) => setFullNameInput(e.target.value)}
           label="Full Name"
           type="text"
         />
         <TextFieldWithIcon
-          inputRef={passwordInputRef}
+          value={passwordInput}
+          onChange={(e) => setPasswordInput(e.target.value)}
           label="Password"
           type="password"
         />
