@@ -4,6 +4,9 @@ import { baseURL } from "./base";
 
 export const test = () => baseURL.get("/auth");
 
+export const verifyUser = (userInfo: UserDto) =>
+  baseURL.post("/auth/users/verification", userInfo);
+
 export const createUser = (userInfo: UserDto) =>
   baseURL.post("auth/users/create", userInfo);
 

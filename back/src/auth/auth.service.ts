@@ -12,8 +12,12 @@ export class AuthService {
     return 'hello world -auth';
   }
 
+  async verifyUser(email: string, password: string) {
+    return this.userModel.findOne({ email, password });
+  }
+
   async getUser(email: string): Promise<User> {
-    return this.userModel.findOne().where({ email });
+    return this.userModel.findOne({ email });
   }
 
   async createUser({ email, password, name }: UserDto): Promise<User> {

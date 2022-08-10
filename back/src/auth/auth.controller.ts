@@ -22,6 +22,11 @@ export class AuthController {
     return this.authService.getHello();
   }
 
+  @Post('users/verification')
+  verifyUser(@Body() { email, password }): Promise<User> {
+    return this.authService.verifyUser(email, password);
+  }
+
   @Get('users/:email')
   getUser(@Param() { email }): Promise<User> {
     return this.authService.getUser(email);

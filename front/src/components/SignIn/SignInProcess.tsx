@@ -7,19 +7,26 @@ import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import GoogleLogo from "assets/googleLogo.svg";
 import LogoImage from "assets/craa.webp";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
-import { test } from "api/auth";
 import { useNavigate } from "react-router-dom";
+import { verifyUser } from "api/auth";
 
 export function SignInProcess() {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const rememberMeRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    test().then((data) => console.log("data", data.data));
-  }, []);
-
   const navigate = useNavigate();
+
+  const onSignIn = () => {
+    if (!emailInputRef.current || !passwordInputRef.current) return;
+    verifyUser({
+      email: emailInputRef.current.value,
+      password: passwordInputRef.current?.value,
+    });
+    // then login and navigate
+    // if verified => login and navigate
+    // if not => alert
+  };
 
   const goSignUp = () => {
     navigate("/signUp");
@@ -93,13 +100,13 @@ export function SignInProcess() {
         <ButtonWithIcon
           text="Login"
           variant="contained"
-          onClick={() => {}}
+          onClick={onSignIn}
           style={{ backgroundColor: "#2222ff" }}
         />
         <ButtonWithIcon
           text="Sign in with Google"
           variant="outlined"
-          onClick={() => {}}
+          onClick={onSignIn}
           startIcon={<img src={GoogleLogo} width={32} height={32} />}
           style={{ color: "#333333", borderColor: "#333333" }}
         />

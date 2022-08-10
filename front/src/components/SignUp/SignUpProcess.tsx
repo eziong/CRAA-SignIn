@@ -2,15 +2,30 @@ import { Card, CardContent, CardHeader, Typography } from "@mui/material";
 
 import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
+import { createUser } from "api/auth";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
 export function SignUpProcess() {
-  const FullNameInputRef = useRef<HTMLInputElement>(null);
-  const EmailInputRef = useRef<HTMLInputElement>(null);
-  const MobileInputRef = useRef<HTMLInputElement>(null);
+  const fullNameInputRef = useRef<HTMLInputElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
+
+  const onSignUp = () => {
+    if (
+      !emailInputRef.current ||
+      !passwordInputRef.current ||
+      !fullNameInputRef.current
+    )
+      return;
+    createUser({
+      email: emailInputRef.current.value,
+      password: passwordInputRef.current.value,
+      name: fullNameInputRef.current.value,
+    });
+  };
 
   const goSignIn = () => {
     navigate("/");
@@ -32,19 +47,19 @@ export function SignUpProcess() {
         }}
       >
         <TextFieldWithIcon
-          inputRef={FullNameInputRef}
-          label="Full Name"
+          inputRef={emailInputRef}
+          label="Email Address"
           type="email"
         />
         <TextFieldWithIcon
-          inputRef={EmailInputRef}
-          label="Email Address"
-          type="password"
+          inputRef={fullNameInputRef}
+          label="Full Name"
+          type="text"
         />
         <TextFieldWithIcon
-          inputRef={MobileInputRef}
-          label="Mobile No"
-          type="tel"
+          inputRef={passwordInputRef}
+          label="Password"
+          type="password"
         />
       </CardContent>
       <CardContent style={{ paddingTop: 0, paddingBottom: 24 }}>
@@ -59,7 +74,7 @@ export function SignUpProcess() {
         <ButtonWithIcon
           text="Get Started"
           variant="contained"
-          onClick={() => {}}
+          onClick={onSignUp}
           style={{ backgroundColor: "#3333ee" }}
         />
       </CardContent>
