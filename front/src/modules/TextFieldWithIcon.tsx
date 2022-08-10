@@ -27,7 +27,7 @@ export function TextFieldWithIcon({
         endAdornment: (
           <InputAdornment
             position="end"
-            style={{ color: focused ? "blue" : "grey" }}
+            style={{ color: focused ? "#1976d2" : "grey" }}
           >
             {icon}
           </InputAdornment>

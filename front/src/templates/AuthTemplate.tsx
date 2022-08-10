@@ -1,3 +1,6 @@
+import { Box } from "@mui/system";
+import { Paper } from "@mui/material";
+
 export function AuthTemplate({
   ImageComponent,
   ProcessComponent,
@@ -6,35 +9,29 @@ export function AuthTemplate({
   ProcessComponent: JSX.Element;
 }) {
   return (
-    <div
+    <Paper
       style={{
         display: "flex",
         width: "100vw",
         height: "100vh",
       }}
     >
-      <div
-        style={{
-          width: "50%",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        width={"50%"}
       >
         {ImageComponent}
-      </div>
-      <div
-        style={{
-          width: "50%",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+      </Box>
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        width={"50%"}
       >
         {ProcessComponent}
-      </div>
-    </div>
+      </Box>
+    </Paper>
   );
 }

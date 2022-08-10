@@ -20,7 +20,7 @@ export function ButtonWithIcon({
       variant={variant}
       fullWidth={true}
       onClick={onClick}
-      style={style}
+      style={{ height: 45, ...style }}
       startIcon={startIcon}
       endIcon={endIcon}
     >
