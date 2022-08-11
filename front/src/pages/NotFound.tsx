@@ -1,13 +1,13 @@
 import { BasicTemplate } from "templates/BasicTemplate";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRoute } from "hooks/route";
 
 export function NotFound({ path }: { path: string }) {
-  const navigate = useNavigate();
+  const { goPath } = useRoute();
 
   useEffect(() => {
     setTimeout(() => {
-      navigate(path);
+      goPath(path);
     }, 1000);
   }, []);
 

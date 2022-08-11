@@ -4,18 +4,13 @@ import { useRef, useState } from "react";
 
 import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
-import { useNavigate } from "react-router-dom";
+import { useRoute } from "hooks/route";
 
 export function PasswordRecoveryProcess() {
   const [emailInput, setEmailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [repeatPasswordInput, setRepeatPasswordInput] = useState<string>("");
-
-  const navigate = useNavigate();
-
-  const goSignIn = () => {
-    navigate("/");
-  };
+  const { goHomePage, goSignInPage } = useRoute();
 
   const onChangePassword = async () => {
     if (passwordInput !== repeatPasswordInput)
@@ -23,7 +18,7 @@ export function PasswordRecoveryProcess() {
     const user = (await readUser(emailInput)).data;
     if (user) {
       return updateUser({ email: emailInput, password: passwordInput }).then(
-        () => navigate("/signIn")
+        () => goHomePage()
       );
     } else {
       return alert("not exist user");
@@ -94,7 +89,7 @@ export function PasswordRecoveryProcess() {
           <span>Go back to </span>
           <span
             className="text-link"
-            onClick={goSignIn}
+            onClick={goSignInPage}
             style={{ fontWeight: 550 }}
           >
             Sign in

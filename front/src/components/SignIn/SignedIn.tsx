@@ -1,30 +1,13 @@
 import { Box, Card, CardContent, CardHeader, Typography } from "@mui/material";
-import { providerState, tokenState } from "recoil/auth";
 
 import { ButtonWithIcon } from "modules/ButtonWithIcon";
-import { GoogleLoginButton } from "./GoogleLoginButton";
 import LogoImage from "assets/craa.webp";
-import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useAuthentication } from "hooks/auth";
+import { useRoute } from "hooks/route";
 
 export const SignedIn = () => {
-  const setToken = useSetRecoilState(tokenState);
-  const setProvider = useSetRecoilState(providerState);
-
-  const navigate = useNavigate();
-
-  const goHome = () => {
-    navigate("/");
-  };
-
-  const onSignOut = () => {
-    setToken("");
-    setProvider("local");
-  };
-
-  const goSignUp = () => {
-    navigate("/signUp");
-  };
+  const { onLogOut } = useAuthentication();
+  const { goHomePage, goSignUpPage } = useRoute();
 
   return (
     <Card elevation={0} style={{ width: 400 }}>
@@ -50,13 +33,13 @@ export const SignedIn = () => {
       >
         <ButtonWithIcon
           text="Go to home"
-          onClick={goHome}
+          onClick={goHomePage}
           variant="contained"
         />
         <ButtonWithIcon
           text="Logout"
           variant="contained"
-          onClick={onSignOut}
+          onClick={onLogOut}
           style={{ backgroundColor: "#2222ff" }}
         />
       </CardContent>
@@ -65,7 +48,7 @@ export const SignedIn = () => {
           <span>Create new account? </span>
           <span
             className="text-link"
-            onClick={goSignUp}
+            onClick={goSignUpPage}
             style={{ fontWeight: 550 }}
           >
             Sign Up

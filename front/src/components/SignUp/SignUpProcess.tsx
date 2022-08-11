@@ -4,14 +4,13 @@ import { useRef, useState } from "react";
 import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
 import { createUser } from "api/auth";
-import { useNavigate } from "react-router-dom";
+import { useRoute } from "hooks/route";
 
 export function SignUpProcess() {
   const [fullNameInput, setFullNameInput] = useState<string>("");
   const [emailInput, setEmailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
-
-  const navigate = useNavigate();
+  const { goVerificationPage, goSignInPage } = useRoute();
 
   const onSignUp = async () => {
     if (
@@ -28,20 +27,10 @@ export function SignUpProcess() {
         password: passwordInput,
         name: fullNameInput,
       });
-
-      navigate("/verification", {
-        state: {
-          email: emailInput,
-          password: passwordInput,
-        },
-      });
+      goVerificationPage({ email: emailInput, password: passwordInput });
     } catch (err) {
       return alert("Email already exist");
     }
-  };
-
-  const goSignIn = () => {
-    navigate("/signIn");
   };
 
   return (
@@ -112,7 +101,7 @@ export function SignUpProcess() {
           <span>Already a member? </span>
           <span
             className="text-link"
-            onClick={goSignIn}
+            onClick={goSignInPage}
             style={{ fontWeight: 550 }}
           >
             Sign in

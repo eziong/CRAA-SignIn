@@ -8,7 +8,7 @@ import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import { GoogleLoginButton } from "./GoogleLoginButton";
 import LogoImage from "assets/craa.webp";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
-import { useNavigate } from "react-router-dom";
+import { useRoute } from "hooks/route";
 
 export function SignInProcess() {
   const [emailInput, setEmailInput] = useState<string>(
@@ -17,8 +17,8 @@ export function SignInProcess() {
   const [passwordInput, setPasswordInput] = useState<string>("");
 
   const rememberMeRef = useRef<HTMLInputElement>(null);
-
-  const navigate = useNavigate();
+  const { goSignUpPage, goVerificationPage, goPasswordRecoveryPage } =
+    useRoute();
 
   const onSignIn = () => {
     if (!/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(emailInput))
@@ -27,16 +27,7 @@ export function SignInProcess() {
     if (rememberMeRef.current?.checked) {
       setStorage("lastLogin", emailInput);
     }
-    navigate("/verification", {
-      state: {
-        email: emailInput,
-        password: passwordInput,
-      },
-    });
-  };
-
-  const goSignUp = () => {
-    navigate("/signUp");
+    goVerificationPage({ email: emailInput, password: passwordInput });
   };
 
   return (
@@ -101,13 +92,7 @@ export function SignInProcess() {
             <label htmlFor="rememberMe">Remember Me</label>
           </Typography>
           <Typography className="text-link">
-            <span
-              onClick={() => {
-                navigate("/passwordRecovery");
-              }}
-            >
-              Recovery Password
-            </span>
+            <span onClick={goPasswordRecoveryPage}>Recovery Password</span>
           </Typography>
         </Box>
       </CardContent>
@@ -133,7 +118,7 @@ export function SignInProcess() {
           <span>Don't have an account yet? </span>
           <span
             className="text-link"
-            onClick={goSignUp}
+            onClick={goSignUpPage}
             style={{ fontWeight: 550 }}
           >
             Sign Up

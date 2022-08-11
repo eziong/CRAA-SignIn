@@ -47,7 +47,6 @@ export class AuthService {
       password,
       name,
     });
-    console.log(user);
     return this.getUserToken(user);
   }
 

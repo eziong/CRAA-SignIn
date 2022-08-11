@@ -4,13 +4,13 @@ import { providerState, tokenState } from "recoil/auth";
 /* eslint-disable */
 import { ButtonWithIcon } from "modules/ButtonWithIcon";
 import GoogleLogo from "assets/googleLogo.svg";
-import { useNavigate } from "react-router-dom";
+import { useRoute } from "hooks/route";
 import { useSetRecoilState } from "recoil";
 
 export const GoogleLoginButton = () => {
   const setToken = useSetRecoilState(tokenState);
   const setProvider = useSetRecoilState(providerState);
-  const navigate = useNavigate();
+  const { goHomePage, goSignInPage } = useRoute();
 
   const clientId =
     "535784911394-lsrues2ner417tlonvu9kk9c0cqrpbsm.apps.googleusercontent.com";
@@ -18,13 +18,12 @@ export const GoogleLoginButton = () => {
   const onResolve = ({ provider, data }: IResolveParams) => {
     setToken(data?.access_token ? data.access_token : "");
     setProvider("google");
-    navigate("/");
+    goHomePage();
   };
 
   const onReject = (data: any) => {
     setToken("");
     setProvider("local");
-    navigate("/signIn");
   };
 
   return (
