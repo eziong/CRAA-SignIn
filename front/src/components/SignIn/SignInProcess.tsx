@@ -1,11 +1,11 @@
 import { AlternateEmail, LockOutlined } from "@mui/icons-material";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
 import { getStorage, setStorage } from "utils/storage";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { Box } from "@mui/system";
 import { ButtonWithIcon } from "modules/ButtonWithIcon";
-import GoogleLogo from "assets/googleLogo.svg";
+import { GoogleLoginButton } from "./GoogleLoginButton";
 import LogoImage from "assets/craa.webp";
 import { TextFieldWithIcon } from "modules/TextFieldWithIcon";
 import { useNavigate } from "react-router-dom";
@@ -126,13 +126,7 @@ export function SignInProcess() {
           onClick={onSignIn}
           style={{ backgroundColor: "#2222ff" }}
         />
-        <ButtonWithIcon
-          text="Sign in with Google"
-          variant="outlined"
-          onClick={onSignIn}
-          startIcon={<img src={GoogleLogo} width={32} height={32} />}
-          style={{ color: "#333333", borderColor: "#333333" }}
-        />
+        <GoogleLoginButton onClick={onSignIn} />
       </CardContent>
       <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
         <Typography>
