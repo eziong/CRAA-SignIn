@@ -27,9 +27,9 @@ export class AuthController {
     return this.authService.verifyUser(email, password);
   }
 
-  @Get('users/verification/:token')
-  verifyUserWithToken(@Param() { token }) {
-    return this.authService.verifyUserWithToken(token);
+  @Get('users/verification/:provider/:token')
+  verifyUserWithToken(@Param() { provider, token }) {
+    return this.authService.verifyUserWithToken(token, provider);
   }
 
   @Get('users/:email')

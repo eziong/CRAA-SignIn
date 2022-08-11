@@ -16,11 +16,11 @@
 - Remember me
 - Email validation
 - jwt authentication (no refresh token)
+- Recovery password
+- Google login
 
 # Undeveloped
 
-- Google login
-- Recovery password
 - Terms of policy (document)
 - Privacy Policy (document)
 - background image

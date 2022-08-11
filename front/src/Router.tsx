@@ -1,5 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { tokenState, verifiedState, verifyLoadingState } from "recoil/auth";
+import {
+  providerState,
+  tokenState,
+  verifiedState,
+  verifyLoadingState,
+} from "recoil/auth";
 import { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
@@ -15,12 +20,13 @@ export function Router() {
   const setIsVerified = useSetRecoilState(verifiedState);
   const setIsVerifyingLoading = useSetRecoilState(verifyLoadingState);
   const [token, setToken] = useRecoilState(tokenState);
+  const [provider, setProvider] = useRecoilState(providerState);
 
   useEffect(() => {
     (async () => {
       if (token) {
         setIsVerifyingLoading(true);
-        return (await verifyUserWithToken(token)).data;
+        return (await verifyUserWithToken(token, provider)).data;
       }
       return false;
     })().then((isValidToken) => {
@@ -28,6 +34,7 @@ export function Router() {
       if (isValidToken) return setIsVerified(true);
       else {
         setToken("");
+        setProvider("local");
         return setIsVerified(false);
       }
     });

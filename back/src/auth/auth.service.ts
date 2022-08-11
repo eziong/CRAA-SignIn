@@ -4,7 +4,6 @@ import { Model } from 'mongoose';
 import { User, UserDocument } from 'schema/user';
 import { UserDto } from './types';
 import { JwtService } from '@nestjs/jwt';
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -26,9 +25,15 @@ export class AuthService {
     return '';
   }
 
-  async verifyUserWithToken(token: string) {
-    const result = this.jwtService.decode(token);
-    if (result) return true;
+  async verifyUserWithToken(token: string, provider: string) {
+    if (provider === 'google') {
+      // verify google oauth token
+      // const client = new OAuth2Client();
+      return true;
+    } else if (provider === 'local') {
+      const result = this.jwtService.decode(token);
+      if (result) return true;
+    }
     return false;
   }
 

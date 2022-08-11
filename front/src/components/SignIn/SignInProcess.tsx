@@ -126,7 +126,7 @@ export function SignInProcess() {
           onClick={onSignIn}
           style={{ backgroundColor: "#2222ff" }}
         />
-        <GoogleLoginButton onClick={onSignIn} />
+        <GoogleLoginButton />
       </CardContent>
       <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
         <Typography>
