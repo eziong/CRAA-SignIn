@@ -103,7 +103,7 @@ export function SignInProcess() {
           <Typography className="text-link">
             <span
               onClick={() => {
-                alert("not developed yet");
+                navigate("/passwordRecovery");
               }}
             >
               Recovery Password

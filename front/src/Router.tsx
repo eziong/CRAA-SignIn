@@ -5,6 +5,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 
 import { Home } from "pages/Home";
 import { NotFound } from "pages/NotFound";
+import { PasswordRecovery } from "pages/PasswordRecovery";
 import { SignIn } from "pages/SignIn";
 import { SignUp } from "pages/SignUp";
 import { Verification } from "pages/Verification";
@@ -38,6 +39,7 @@ export function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
+        <Route path="/passwordRecovery" element={<PasswordRecovery />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/*" element={<NotFound path="/" />} />
       </Routes>
