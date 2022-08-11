@@ -19,10 +19,13 @@
 - Recovery password
 - Google login
 
+# Developing
+
+- main page
+- animation
+
 # Undeveloped
 
 - Terms of policy (document)
 - Privacy Policy (document)
 - background image
-- main page
-- animation
