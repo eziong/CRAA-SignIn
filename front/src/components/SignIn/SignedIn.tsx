@@ -13,6 +13,10 @@ export const SignedIn = () => {
 
   const navigate = useNavigate();
 
+  const goHome = () => {
+    navigate("/");
+  };
+
   const onSignOut = () => {
     setToken("");
     setProvider("local");
@@ -39,36 +43,26 @@ export const SignedIn = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          paddingBottom: 50,
-        }}
-      >
-        <Box
-          display={"flex"}
-          flexDirection={"column"}
-          height={138}
-          justifyContent="space-between"
-        ></Box>
-      </CardContent>
-      <CardContent
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          height: 120,
+          height: 150,
           justifyContent: "space-between",
           paddingBottom: 100,
         }}
       >
+        <ButtonWithIcon
+          text="Go to home"
+          onClick={goHome}
+          variant="contained"
+        />
         <ButtonWithIcon
           text="Logout"
           variant="contained"
           onClick={onSignOut}
           style={{ backgroundColor: "#2222ff" }}
         />
-        <GoogleLoginButton />
       </CardContent>
       <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
         <Typography>
-          <span>Don't have an account yet? </span>
+          <span>Create new account? </span>
           <span
             className="text-link"
             onClick={goSignUp}

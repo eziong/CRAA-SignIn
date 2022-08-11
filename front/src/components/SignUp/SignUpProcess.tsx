@@ -41,7 +41,7 @@ export function SignUpProcess() {
   };
 
   const goSignIn = () => {
-    navigate("/");
+    navigate("/signIn");
   };
 
   return (
