@@ -22,18 +22,22 @@ export function SignUpProcess() {
     )
       return alert("Check validation");
 
-    await createUser({
-      email: emailInput,
-      password: passwordInput,
-      name: fullNameInput,
-    });
-
-    navigate("/verification", {
-      state: {
+    try {
+      await createUser({
         email: emailInput,
         password: passwordInput,
-      },
-    });
+        name: fullNameInput,
+      });
+
+      navigate("/verification", {
+        state: {
+          email: emailInput,
+          password: passwordInput,
+        },
+      });
+    } catch (err) {
+      return alert("Email already exist");
+    }
   };
 
   const goSignIn = () => {

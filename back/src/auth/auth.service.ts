@@ -42,6 +42,7 @@ export class AuthService {
       password,
       name,
     });
+    console.log(user);
     return this.getUserToken(user);
   }
 
@@ -50,7 +51,7 @@ export class AuthService {
       .findOneAndUpdate(
         { email },
         { $set: { email, password, name } },
-        { new: true },
+        { new: true, upsert: false },
       )
       .then((data) => {
         console.log(data);
