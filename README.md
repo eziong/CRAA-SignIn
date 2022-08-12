@@ -23,6 +23,7 @@
 
 - main page
 - animation
+- vimeo player
 
 # Undeveloped
 

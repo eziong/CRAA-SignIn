@@ -1,8 +1,16 @@
-import { BasicTemplate } from "templates/BasicTemplate";
-import { HomeButton } from "components/Home";
+import { HomeControl } from "components/Home/HomeControl";
+import { HomeTemplate } from "templates/HomeTemplate";
+import { HomeVideo } from "components/Home/HomeVideo";
 import { useVerificationRoute } from "hooks/route";
 export function Home() {
   useVerificationRoute();
+  const videoId = "738771222";
 
-  return <BasicTemplate component={<HomeButton />} />;
+  return (
+    <HomeTemplate
+      VideoComponent={<HomeVideo videoId={videoId} />}
+      ControlComponent={<HomeControl videoId={videoId} />}
+    />
+  );
+  // return <BasicTemplate component={<HomeButton />} />;
 }
