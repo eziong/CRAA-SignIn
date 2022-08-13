@@ -4,7 +4,7 @@ import { atom } from "recoil";
 export const vimeoControlState = atom<VimeoControlType>({
   key: "vimeoControlState",
   default: {
-    playingTime: null,
+    playingTime: 0,
     isPlaying: false,
   },
 });

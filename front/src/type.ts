@@ -11,6 +11,6 @@ export type SubtitleLineType = {
 };
 
 export type VimeoControlType = {
-  playingTime: number | null;
+  playingTime: number;
   isPlaying: boolean;
 };
